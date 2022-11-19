@@ -18,14 +18,17 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowHeader()
+           .AllowAnyMethod()
+           .WithOrigins("http://localhost:"));
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
